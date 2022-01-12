@@ -24,11 +24,7 @@ const LayoutForSmallScreens = () => {
         { name: 'footer', start: [0, 4], end: [0, 4]},
       ]}
     >
-      <Box gridArea="header" background="blue">header</Box>
-      <Box gridArea="nav" background="orange">nav</Box>
-      <Box gridArea="sidebar" background="green">sidebar</Box>
-      <Box gridArea="content" background="red">content</Box>
-      <Box gridArea="footer" background="yellow">footer</Box>
+      {getLayoutComponents()}
     </Grid> 
   )
 }
@@ -47,13 +43,21 @@ const LayoutForLargerScreens = () => {
         { name: 'sidebar', start: [2, 1], end: [2, 1] },
       ]}
     >
+      {getLayoutComponents()}
+    </Grid>
+  )
+}
+
+const getLayoutComponents = () => {
+  return [
+    <>
       <Box gridArea="header" background="blue">header</Box>
       <Box gridArea="nav" background="orange">nav</Box>
       <Box gridArea="sidebar" background="green">sidebar</Box>
       <Box gridArea="content" background="red">content</Box>
       <Box gridArea="footer" background="yellow">footer</Box>
-    </Grid>
-  )
+    </>
+  ]
 }
 
 export default App;
