@@ -5,31 +5,29 @@ var hash = 1317985395605002507n; // westernista
 printStringForHashAndCount(hash, 11);
 
 function printStringForHashAndCount(hash, count) {
-    let start = [];
-    for(let i = 0; i < count; i++) {
-        start.push(CHARACTERS[0]);
-    }
-    let k = 0;
-    let j = 0
-    while (k < count) {
-        j = 0;
-        while(j < CHARACTERS.length) {
-            start[k] = CHARACTERS[j]
-            let string = start.join("")
-            let currentHash = getHashForString(string);
+    let currentVariation = getFirstVariationForCount(count);
+    for(let variationIndex = 0; variationIndex < currentVariation.length; variationIndex++) {
+        for(let charactersIndex = 0; charactersIndex < CHARACTERS.length; charactersIndex++) {
+            currentVariation[variationIndex] = CHARACTERS[charactersIndex]
+            let currentString = currentVariation.join("")
+            let currentHash = getHashForString(currentString);
             if (currentHash === hash) {
-                console.log(string);
+                console.log(currentString);
                 return;
             } else if (currentHash > hash) {
-                start[k] = CHARACTERS[j - 1];
-                k++;
-                j = 0;
-            } else {
-                j++;
-            }
-        }
-        k++;
+                currentVariation[variationIndex] = CHARACTERS[charactersIndex - 1];
+                break;
+            }                 
+        }    
     }
+}
+
+function getFirstVariationForCount(count) {
+    let firstVariation = [];
+    for(let i = 0; i < count; i++) {
+        firstVariation.push(CHARACTERS[0]);
+    }
+    return firstVariation;
 }
 
 function getHashForString(s) {
@@ -38,22 +36,4 @@ function getHashForString(s) {
         h = h * 37n + BigInt(CHARACTERS.indexOf(s.charAt(i)));
     }
     return h;
-}
-
-function printStringForHashAndNumberOfLetters(output, hash, numberOfLetters) {
-    let str = output.join("")
-    let currentHash = getHashForString(str)
-    if (numberOfLetters === 0) {
-        console.log(str);
-        if (currentHash === hash) {
-            console.log("here")
-            return;
-        }
-    } else {
-        for(let i = 0; i < CHARACTERS.length; i++) {
-            output.push(CHARACTERS.charAt(i));
-            printStringForHashAndNumberOfLetters(output, hash, numberOfLetters - 1);
-            output.pop();
-        }
-    }
 }
