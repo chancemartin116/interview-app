@@ -1,10 +1,12 @@
+/**
+ * Get string for hash and number of letters
+ * Runs in O(S^2) ?
+ */
 class HashApplicationProblem {
     static #CHARACTERS = "acdefgilnoprstuw";
 
-    // Get string from hash and number of letters (count)
-    // Runs in O(S^2) ?
-    static printStringForHashAndCount(hash, count) {
-        let currentVariation = HashApplicationProblem.#getFirstVariationForCount(count);
+    static printStringForHashAndNumberOfLetters(hash, numberOfLetters) {
+        let currentVariation = HashApplicationProblem.#getFirstVariationForNumberOfLetters(numberOfLetters);
         for(let variationIndex = 0; variationIndex < currentVariation.length; variationIndex++) {
             for(let charactersIndex = 0; charactersIndex < HashApplicationProblem.#CHARACTERS.length; charactersIndex++) {
                 currentVariation[variationIndex] = HashApplicationProblem.#CHARACTERS[charactersIndex]
@@ -21,9 +23,9 @@ class HashApplicationProblem {
         }
     }
 
-    static #getFirstVariationForCount(count) {
+    static #getFirstVariationForNumberOfLetters(numberOfLetters) {
         let firstVariation = [];
-        for(let i = 0; i < count; i++) {
+        for(let i = 0; i < numberOfLetters; i++) {
             firstVariation.push(HashApplicationProblem.#CHARACTERS[0]);
         }
         return firstVariation;
@@ -38,4 +40,4 @@ class HashApplicationProblem {
     }
 }
 
-HashApplicationProblem.printStringForHashAndCount(BigInt(process.argv[2]), process.argv[3])
+HashApplicationProblem.printStringForHashAndNumberOfLetters(BigInt(process.argv[2]), process.argv[3])
